@@ -6,8 +6,13 @@ var config = new ConfigurationBuilder()
     .Build();
 
 var cacheConfigSection = config.GetSection("CacheConfiguration");
+
 var cacheChild = config.GetSection("CacheConfiguration").GetChildren().ToDictionary(x => x.Key, v => v.Value);
+
+// at this point you convert the settings into a c# class
 var cacheChildget = config.GetSection("CacheConfiguration").Get<CacheConfig>();
+
+Console.WriteLine($"cacueUseCase Name: {cacheChildget?.CacheUseCase[0].Name}");
 
 var cacheConfig = config.GetSection("CacheConfiguration");
 var cacheConfigChild = config.GetSection("CacheConfiguration").GetSection("CacheUseCase");
